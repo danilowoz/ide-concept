@@ -1,0 +1,121 @@
+pre[class*="language-"],
+code[class*="language-"] {
+  color: #9cdcfe;
+  text-shadow: none;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 1rem;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+@media print {
+  pre[class*="language-"],
+  code[class*="language-"] {
+    text-shadow: none;
+  }
+}
+
+pre[class*="language-"] {
+  padding: 2em;
+  padding-top: 40px;
+  margin: 0.5em 0;
+  overflow: auto;
+  background-color: #1e1e1e;
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  color: #db4c69;
+  background: #f9f2f4;
+}
+
+/*********************************************************
+* Tokens
+*/
+
+.token.comment {
+  color: #5c6370;
+  font-style: italic;
+}
+.token.keyword {
+  color: #c678dd;
+}
+.token.selector {
+  color: #c678dd;
+}
+.token.changed {
+  color: #c678dd;
+}
+.token.operator {
+  color: #abb2bf;
+}
+.token.property {
+  color: #abb2bf;
+}
+.token.constant {
+  color: #d19a66;
+}
+.token.number {
+  color: #d19a66;
+}
+.token.builtin {
+  color: #d19a66;
+}
+.token.attr-name {
+  color: #d19a66;
+}
+.token.char {
+  color: #56b6c2;
+}
+.token.symbol {
+  color: #56b6c2;
+}
+.token.variable {
+  color: #e06c75;
+}
+.token.tag {
+  color: #e06c75;
+}
+.token.deleted {
+  color: #e06c75;
+}
+.token.string {
+  color: #98c379;
+}
+.token.inserted {
+  color: #98c379;
+}
+.token.punctuation {
+  color: #5c6370;
+}
+.token.function {
+  color: #61afef;
+}
+.token.class-name {
+  color: #e5c07b;
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
