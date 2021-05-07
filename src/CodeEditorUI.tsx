@@ -7,7 +7,7 @@ export const Container = styled.div`
   margin-left: 44px;
 `;
 
-console.log;
+console.log("foo");
 
 const common = css`
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
