@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import Prism from "prismjs";
 import "./syntax-theme.css";
 
 import { Container, Bar, Textarea, Code } from "./CodeEditorUI";
 
-const CodeEditor: React.FC<{ data: string; barColor?: string }> = ({
-  data,
-  barColor
-}) => {
+const CodeEditor: React.FC<{
+  data: string;
+  barColor?: string;
+  innerRef: any;
+  onJumpArea: any;
+}> = ({ data, innerRef, barColor, onJumpArea }) => {
   const [content, setContent] = useState(data);
 
   const handleKeyDown = (evt: any) => {
@@ -26,6 +28,24 @@ const CodeEditor: React.FC<{ data: string; barColor?: string }> = ({
 
       setContent(value);
     }
+
+    const ARROW_DOWN = 40;
+    const ARROW_UP = 38;
+
+    const currentPosition = document.activeElement.selectionStart;
+    const lastRow = value
+      .split(/\n/)
+      .filter((e, index, array) => index + 1 !== array.length)
+      .join("\n").length;
+
+    if (currentPosition >= lastRow && evt.keyCode === ARROW_DOWN) {
+      onJumpArea(evt.keyCode);
+    } else if (
+      currentPosition <= value.split(/\n/)[0].length &&
+      evt.keyCode === ARROW_UP
+    ) {
+      onJumpArea(evt.keyCode);
+    }
   };
 
   useEffect(() => {
@@ -36,8 +56,8 @@ const CodeEditor: React.FC<{ data: string; barColor?: string }> = ({
     <Container>
       {barColor && <Bar style={{ backgroundColor: barColor }} />}
       <Textarea
-        className="code-input"
-        value={content}
+        ref={innerRef}
+        defaultValue={data}
         onChange={(evt) => setContent(evt.target.value)}
         onKeyDown={handleKeyDown}
       />
@@ -49,4 +69,13 @@ const CodeEditor: React.FC<{ data: string; barColor?: string }> = ({
   );
 };
 
-export default CodeEditor;
+export default forwardRef<
+  any,
+  {
+    data: string;
+    barColor?: string;
+    onJumpArea: any;
+  }
+>(({ data, onJumpArea, ...props }, ref) => (
+  <CodeEditor onJumpArea={onJumpArea} data={data} innerRef={ref} {...props} />
+));

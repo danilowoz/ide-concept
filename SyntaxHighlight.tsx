@@ -8,8 +8,6 @@ const CodeEditor = (props) => {
     let value = content,
       selStartPos = evt.currentTarget.selectionStart;
 
-    console.log(evt.currentTarget);
-
     // handle 4-space indent on
     if (evt.key === "Tab") {
       value =
