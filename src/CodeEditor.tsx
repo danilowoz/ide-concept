@@ -1,16 +1,51 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState, useEffect, forwardRef, useRef } from "react";
 import Prism from "prismjs";
 import "./syntax-theme.css";
+import ToolTip from "./utils/ToolTip";
+import { useCombinedRefs } from "./utils/helpers";
+import { useHotkeys } from "react-hotkeys-hook";
 
 import { Container, Bar, Textarea, Code } from "./CodeEditorUI";
+import { BarAdd } from "./utils/buttons/BarAdd";
 
-const CodeEditor: React.FC<{
+function CodeEditor({
+  data,
+  innerRef,
+  barColor,
+  onJumpArea,
+  menuActions,
+  type
+}: {
+  innerRef: any;
   data: string;
   barColor?: string;
-  innerRef: any;
   onJumpArea: any;
-}> = ({ data, innerRef, barColor, onJumpArea }) => {
+  menuActions?: any[];
+  type: "empty" | "state" | "effect";
+}) {
+  const textareaRef = useRef(innerRef);
+  const buttonRef = useRef<HTMLButtonElement>();
   const [content, setContent] = useState(data);
+
+  const combinedRef = useCombinedRefs(textareaRef, innerRef);
+
+  const keyBingds = {
+    state: "ctrl+s",
+    effect: "ctrl+e",
+    empty: ""
+  };
+
+  useHotkeys(keyBingds[type], () => {
+    const event = new MouseEvent("mousedown", {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+      screenX: 0,
+      screenY: 0
+    });
+
+    buttonRef.current?.dispatchEvent(event);
+  });
 
   const handleKeyDown = (evt: any) => {
     let value = content,
@@ -32,7 +67,7 @@ const CodeEditor: React.FC<{
     const ARROW_DOWN = 40;
     const ARROW_UP = 38;
 
-    const currentPosition = document.activeElement.selectionStart;
+    const currentPosition = document.activeElement?.selectionStart;
     const lastRow = value
       .split(/\n/)
       .filter((e, index, array) => index + 1 !== array.length)
@@ -48,16 +83,43 @@ const CodeEditor: React.FC<{
     }
   };
 
+  const onSelect = (template: string) => {
+    setContent((prev) => {
+      const removeLastEmptyRow = prev
+        .split(/\n/)
+        .filter(
+          (e, index, array) => index + 1 !== array.length && e.trim() !== ""
+        )
+        .join("\n");
+
+      return `${type === "state" ? removeLastEmptyRow : prev}
+  ${template}
+`;
+    });
+
+    combinedRef.current?.focus();
+  };
+
   useEffect(() => {
     Prism.highlightAll();
   }, [content]);
 
   return (
     <Container>
-      {barColor && <Bar style={{ backgroundColor: barColor }} />}
+      {barColor && (
+        <Bar style={{ backgroundColor: barColor }}>
+          <ToolTip
+            items={menuActions}
+            backgroundColor={barColor}
+            triggerRef={buttonRef}
+            trigger={BarAdd}
+            onSelect={onSelect}
+          />
+        </Bar>
+      )}
       <Textarea
-        ref={innerRef}
-        defaultValue={data}
+        ref={combinedRef}
+        value={content}
         onChange={(evt) => setContent(evt.target.value)}
         onKeyDown={handleKeyDown}
       />
@@ -67,7 +129,7 @@ const CodeEditor: React.FC<{
       </Code>
     </Container>
   );
-};
+}
 
 export default forwardRef<
   any,
@@ -75,6 +137,8 @@ export default forwardRef<
     data: string;
     barColor?: string;
     onJumpArea: any;
+    menuActions?: any[];
+    type: "empty" | "state" | "effect";
   }
 >(({ data, onJumpArea, ...props }, ref) => (
   <CodeEditor onJumpArea={onJumpArea} data={data} innerRef={ref} {...props} />

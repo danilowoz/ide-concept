@@ -59,4 +59,16 @@ export const Bar = styled.div`
   top: 0;
   bottom: 0;
   border-radius: 50px;
+
+  &:hover {
+    .add-button {
+      opacity: 1;
+    }
+  }
+
+  .add-button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
 `;

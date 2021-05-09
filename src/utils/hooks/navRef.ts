@@ -19,7 +19,6 @@ const useNavRef = () => {
   const onJumpArea = (index: number) => (event: number) => {
     if (event === ARROW_DOWN) {
       refs.current.get(index + 1)?.focus();
-      refs.current.get(index + 1)?.setSelectionRange(1, 1);
     } else if (event === ARROW_UP) {
       refs.current.get(index - 1)?.focus();
     }
