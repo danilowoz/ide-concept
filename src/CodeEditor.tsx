@@ -1,12 +1,11 @@
 import React, { useState, useEffect, forwardRef, useRef } from "react";
 import Prism from "prismjs";
 import "./syntax-theme.css";
-import ToolTip from "./utils/ToolTip";
-import { useCombinedRefs } from "./utils/helpers";
 import { useHotkeys } from "react-hotkeys-hook";
 
-import { Container, Bar, Textarea, Code } from "./CodeEditorUI";
-import { BarAdd } from "./utils/buttons/BarAdd";
+import { useCombinedRefs } from "./utils/helpers";
+import { Container, Textarea, Code } from "./CodeEditorUI";
+import { SideBar } from "./utils/SideBar";
 
 function CodeEditor({
   data,
@@ -107,16 +106,14 @@ function CodeEditor({
   return (
     <Container>
       {barColor && (
-        <Bar style={{ backgroundColor: barColor }}>
-          <ToolTip
-            items={menuActions}
-            backgroundColor={barColor}
-            triggerRef={buttonRef}
-            trigger={BarAdd}
-            onSelect={onSelect}
-          />
-        </Bar>
+        <SideBar
+          barColor={barColor}
+          menuActions={menuActions}
+          triggerRef={buttonRef}
+          onSelect={onSelect}
+        />
       )}
+
       <Textarea
         ref={combinedRef}
         value={content}

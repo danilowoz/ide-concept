@@ -48,6 +48,7 @@ const StyledItem = styled(DropdownMenu.Item)`
       padding-left: 0;
       padding-right: 0;
       text-align: center;
+      min-width: 35px;
       max-width: 35px;
       margin-left: 3px;
     }
@@ -72,12 +73,17 @@ const ToolTip: React.FC<{
   return (
     <DropdownMenu.Root>
       <Trigger
-        // ref={triggerRef}
-        as={(asProps) => <DropdownMenu.Trigger ref={triggerRef} {...asProps} />}
+        as={(asProps) => (
+          <DropdownMenu.Trigger
+            className="add-button"
+            ref={triggerRef}
+            {...asProps}
+          />
+        )}
       />
       <StyledContent
         align={"start"}
-        alignOffset={-20}
+        alignOffset={-19}
         style={{ backgroundColor }}
       >
         {items.map((item) => {
@@ -90,7 +96,7 @@ const ToolTip: React.FC<{
           };
 
           return (
-            <StyledItem onSelect={handle}>
+            <StyledItem key={item.title} onSelect={handle}>
               <span onMouseEnter={() => setLocalClick("main")} className="box">
                 {item.title}
               </span>

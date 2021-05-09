@@ -2,15 +2,18 @@ import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Button = styled(motion.button)`
+const Button = styled(motion.div)`
   background: none;
   border: 0;
   outline: 0;
 
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
   width: 20px;
   height: 20px;
   border-radius: 20px;
-  opacity: 0.4;
 
   display: flex;
 
@@ -32,7 +35,7 @@ const Button = styled(motion.button)`
 
 const BarAdd: React.FC = ({ ...props }) => {
   return (
-    <Button className="add-button" {...props}>
+    <Button {...props}>
       <svg width="7" height="7" viewBox="0 0 7 7" fill="currentColor">
         <path
           fillRule="evenodd"

@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
+export const Body = styled.div`
+  padding-top: 10em;
+`;
+
 export const Editor = styled.div`
   background: #1a1d1f;
   border-radius: 10px;
-  overflow: hidden;
   padding: 20px 0;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(0, 0, 0, 0.3),
     0px 0px 1px rgba(0, 0, 0, 0.7);
   min-width: 600px;
   width: max-content;
-  margin: 10em auto 0;
+  margin: auto;
   position: relative;
 `;
 
@@ -20,6 +23,8 @@ export const Bar = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 `;
 
 export const LineCounter = styled.div`
