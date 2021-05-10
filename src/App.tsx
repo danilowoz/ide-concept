@@ -1,5 +1,5 @@
 import CodeEditor from "./CodeEditor";
-import { Editor, Bar, LineCounter, Body } from "./AppUI";
+import { Editor, Bar, LineCounter, Body, Filename } from "./AppUI";
 import { useNavRef } from "./utils/hooks/navRef";
 import * as actions from "./actions";
 import { GlobalStyle } from "./utils/globalStyle";
@@ -12,6 +12,7 @@ export default function App() {
       <GlobalStyle />
       <Body>
         <Editor>
+          <Filename>App.jsx</Filename>
           <Bar />
           <LineCounter>
             {new Array(200).fill(" ").map((_, i) => (

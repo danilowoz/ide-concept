@@ -1,6 +1,18 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+const showUp = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+`;
 
 const StyledContent = styled(DropdownMenu.Content)`
   min-width: 130px;
@@ -8,6 +20,8 @@ const StyledContent = styled(DropdownMenu.Content)`
   padding: 6px;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(0, 0, 0, 0.3),
     0px 0px 1px rgba(0, 0, 0, 0.7);
+
+  animation: ${showUp} 0.3s ease;
 `;
 
 const StyledItem = styled(DropdownMenu.Item)`
@@ -73,7 +87,7 @@ const ToolTip: React.FC<{
   return (
     <DropdownMenu.Root>
       <Trigger
-        as={(asProps) => (
+        as={(asProps: any) => (
           <DropdownMenu.Trigger
             className="add-button"
             ref={triggerRef}

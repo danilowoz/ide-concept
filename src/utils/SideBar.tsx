@@ -1,10 +1,9 @@
 import React from "react";
 import ToolTip from "./ToolTip";
-import { motion, useMotionValue, useTransform } from "framer-motion";
 import { BarAdd } from "./buttons/BarAdd";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-export const Bar = styled(motion.div)`
+export const Bar = styled.div`
   background: #313131;
   width: 20px;
   position: absolute;
@@ -33,59 +32,14 @@ const SideBar: React.FC<{
   triggerRef: any;
   menuActions?: any[];
 }> = ({ onSelect, barColor, menuActions, triggerRef }) => {
-  const [[width, height], setTouchableSize] = React.useState([0, 0]);
-  const measuredRef = React.useCallback((node) => {
-    if (node !== null) {
-      const rect = node.getBoundingClientRect();
-      setTouchableSize([rect.width, rect.height]);
-    }
-  }, []);
-
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-
-  const moveTop = useTransform(my, [0, height / 2, height], [-3, 0, 3]);
-  const moveLeft = useTransform(mx, [0, width / 2, width], [-3, 0, 3]);
-  const contentMoveTop = useTransform(
-    my,
-    [0, height / 2, height],
-    [-10, 0, 10]
-  );
-  const contentMoveLeft = useTransform(mx, [0, width / 2, width], [-1, 0, 1]);
-
-  const contentVariants = {
-    blur: { scale: 1 },
-    hover: { scale: 1.1 }
-  };
-
   return (
-    <Bar
-      style={{ backgroundColor: barColor }}
-      ref={measuredRef}
-      onMouseMove={(e) => {
-        const { offsetTop, offsetLeft } = e.currentTarget;
-        mx.set(e.clientX - offsetLeft);
-        my.set(e.clientY - offsetTop);
-      }}
-      whileHover={"hover"}
-    >
-      {/* <ToolTip
+    <Bar style={{ backgroundColor: barColor }}>
+      <ToolTip
         items={menuActions}
         backgroundColor={barColor}
         onSelect={onSelect}
-        // trigger={(props: any) => (
-
-        // )}
+        trigger={(props: any) => <BarAdd className="add-button" {...props} />}
         triggerRef={triggerRef}
-      /> */}
-
-      <BarAdd
-        style={{
-          translateY: contentMoveTop,
-          translateX: contentMoveLeft
-        }}
-        variants={contentVariants}
-        className="add-button"
       />
     </Bar>
   );

@@ -1,8 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Button = styled(motion.div)`
+const Button = styled.div`
   background: none;
   border: 0;
   outline: 0;
@@ -16,20 +15,18 @@ const Button = styled(motion.div)`
   border-radius: 20px;
 
   display: flex;
-
   cursor: pointer;
+  color: #fff;
+  transition: all 0.2s ease;
 
   svg {
     margin: auto;
   }
 
-  transition: all 0.2s ease;
-
   &[aria-expanded="true"],
   &:hover {
-    color: #fff;
     opacity: 1;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.2) !important;
   }
 `;
 
