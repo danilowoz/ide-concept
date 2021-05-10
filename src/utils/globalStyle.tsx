@@ -7,5 +7,6 @@ export const GlobalStyle = createGlobalStyle`
     background: url("./background.jpg") center center;
     background-size: cover;
     height: 100vh;
+    font-family: 'Lato', sans-serif;
   }
 `;

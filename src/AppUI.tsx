@@ -50,7 +50,6 @@ export const Filename = styled.div`
   top: 7px;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
-  font-family: sans-serif;
   font-size: 8px;
   letter-spacing: 0.2px;
 `;

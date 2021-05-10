@@ -26,14 +26,12 @@ const StyledContent = styled(DropdownMenu.Content)`
 
 const StyledItem = styled(DropdownMenu.Item)`
   cursor: default;
-  letter-spacing: 0.1px;
-  font-family: sans-serif;
   border: 0;
   outline: 0;
   background: none;
   text-align: left;
   cursor: pointer;
-
+  letter-spacing: 0.1px;
   font-size: 13px;
   transition: all 0.2s ease;
   display: flex;

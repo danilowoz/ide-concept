@@ -10,6 +10,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
+
       <Body>
         <Editor>
           <Filename>App.jsx</Filename>
