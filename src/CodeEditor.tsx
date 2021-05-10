@@ -133,7 +133,7 @@ export default forwardRef<
   {
     data: string;
     barColor?: string;
-    onJumpArea: any;
+    onJumpArea?: any;
     menuActions?: any[];
     type: "empty" | "state" | "effect";
   }

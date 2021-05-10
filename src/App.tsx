@@ -1,6 +1,6 @@
 import CodeEditor from "./CodeEditor";
 import { Editor, Bar, LineCounter, Body, Filename } from "./AppUI";
-import { useNavRef } from "./utils/hooks/navRef";
+import { useNavRef } from "./utils/navRef";
 import * as actions from "./actions";
 import { GlobalStyle } from "./utils/globalStyle";
 
@@ -49,6 +49,15 @@ export default function App() {
   `}
           />
           <CodeEditor type="empty" data={""} />
+
+          <CodeEditor
+            type="empty"
+            barColor="#552525"
+            data={`  return (
+    <div />
+  )
+}`}
+          />
         </Editor>
       </Body>
     </>

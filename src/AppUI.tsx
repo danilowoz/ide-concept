@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Body = styled.div`
-  padding-top: 10em;
+  padding: 10em 0;
 `;
 
 export const Editor = styled.div`

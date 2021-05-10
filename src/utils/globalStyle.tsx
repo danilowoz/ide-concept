@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     background: url("./background.jpg") center center;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Inter', sans-serif;
   }
 `;

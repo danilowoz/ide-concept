@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
@@ -80,7 +80,7 @@ const ToolTip: React.FC<{
   triggerRef: any;
 }> = ({ trigger, triggerRef, backgroundColor, items = [], onSelect }) => {
   const Trigger = trigger;
-  const [localClick, setLocalClick] = useState("main");
+  const localClick = useRef("main");
 
   return (
     <DropdownMenu.Root>
@@ -100,7 +100,7 @@ const ToolTip: React.FC<{
       >
         {items.map((item) => {
           const handle = () => {
-            if (localClick === "doc") {
+            if (localClick.current === "doc") {
               return window.open(item.documentation);
             }
 
@@ -109,14 +109,17 @@ const ToolTip: React.FC<{
 
           return (
             <StyledItem key={item.title} onSelect={handle}>
-              <span onMouseEnter={() => setLocalClick("main")} className="box">
+              <span
+                className="box"
+                onMouseEnter={() => (localClick.current = "main")}
+              >
                 {item.title}
               </span>
 
               {item.documentation && (
                 <span
-                  onMouseEnter={() => setLocalClick("doc")}
-                  onMouseLeave={() => setLocalClick("main")}
+                  onMouseEnter={() => (localClick.current = "doc")}
+                  onMouseLeave={() => (localClick.current = "main")}
                   className="box"
                 >
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none">

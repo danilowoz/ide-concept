@@ -1,6 +1,6 @@
 import React from "react";
 import ToolTip from "./ToolTip";
-import { BarAdd } from "./buttons/BarAdd";
+import { BarAdd } from "./BarAdd";
 import styled from "styled-components";
 
 export const Bar = styled.div`
