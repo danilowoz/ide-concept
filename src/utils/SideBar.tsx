@@ -31,16 +31,19 @@ const SideBar: React.FC<{
   barColor: string;
   triggerRef: any;
   menuActions?: any[];
-}> = ({ onSelect, barColor, menuActions, triggerRef }) => {
+  type?: "empty" | "state" | "effect" | "render";
+}> = ({ onSelect, barColor, menuActions, triggerRef, type }) => {
   return (
-    <Bar style={{ backgroundColor: barColor }}>
-      <ToolTip
-        items={menuActions}
-        backgroundColor={barColor}
-        onSelect={onSelect}
-        trigger={(props: any) => <BarAdd className="add-button" {...props} />}
-        triggerRef={triggerRef}
-      />
+    <Bar className="handle-bar" style={{ backgroundColor: barColor }}>
+      {type !== "empty" && (
+        <ToolTip
+          items={menuActions}
+          backgroundColor={barColor}
+          onSelect={onSelect}
+          trigger={(props: any) => <BarAdd className="add-button" {...props} />}
+          triggerRef={triggerRef}
+        />
+      )}
     </Bar>
   );
 };

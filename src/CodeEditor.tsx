@@ -20,7 +20,7 @@ function CodeEditor({
   barColor?: string;
   onJumpArea: any;
   menuActions?: any[];
-  type: "empty" | "state" | "effect";
+  type: "empty" | "state" | "effect" | "render";
 }) {
   const textareaRef = useRef(innerRef);
   const buttonRef = useRef<HTMLButtonElement>();
@@ -31,7 +31,8 @@ function CodeEditor({
   const keyBingds = {
     state: "ctrl+s",
     effect: "ctrl+e",
-    empty: ""
+    empty: "",
+    render: "ctrl+r"
   };
 
   useHotkeys(keyBingds[type], () => {
@@ -111,6 +112,7 @@ function CodeEditor({
           menuActions={menuActions}
           triggerRef={buttonRef}
           onSelect={onSelect}
+          type={type}
         />
       )}
 
@@ -135,7 +137,7 @@ export default forwardRef<
     barColor?: string;
     onJumpArea?: any;
     menuActions?: any[];
-    type: "empty" | "state" | "effect";
+    type: "empty" | "state" | "effect" | "render";
   }
 >(({ data, onJumpArea, ...props }, ref) => (
   <CodeEditor onJumpArea={onJumpArea} data={data} innerRef={ref} {...props} />

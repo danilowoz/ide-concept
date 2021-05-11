@@ -3,6 +3,18 @@ import { Editor, Bar, LineCounter, Body, Filename } from "./AppUI";
 import { useNavRef } from "./utils/navRef";
 import * as actions from "./actions";
 import { GlobalStyle } from "./utils/globalStyle";
+import { SorterComponent } from "./SorterComponent";
+import { Render } from "./utils/Render";
+import styled from "styled-components";
+
+const SorterBar = styled(Bar)`
+  user-select: none;
+  background-color: #552525;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+`;
 
 export default function App() {
   const { setRef, onJumpArea } = useNavRef();
@@ -48,14 +60,33 @@ export default function App() {
   }, [])
   `}
           />
+
           <CodeEditor type="empty" data={""} />
+
+          <Render>
+            <CodeEditor
+              type="empty"
+              barColor="#552525"
+              data={`  return (
+    <>`}
+            />
+            <SorterComponent>
+              <>
+                <CodeEditor type="render" data={`      <h1>Hello World</h1>`} />
+                <SorterBar />
+              </>
+              <>
+                <CodeEditor type="render" data={`      <p>Lorem ipsum</p>`} />
+                <SorterBar />
+              </>
+            </SorterComponent>
+
+            <CodeEditor type="render" barColor="#552525" data={`    </> `} />
+          </Render>
 
           <CodeEditor
             type="empty"
-            barColor="#552525"
-            data={`  return (
-    <div />
-  )
+            data={`
 }`}
           />
         </Editor>

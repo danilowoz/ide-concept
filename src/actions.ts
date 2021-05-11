@@ -19,7 +19,9 @@ export const states = [
     }
   }
   
-  const [state, dispatch] = useReducer(reducer, { count: 0 });`
+  const [state, dispatch] = useReducer(reducer,
+    { count: 0 }
+  );`
   },
   {
     title: "useContext",

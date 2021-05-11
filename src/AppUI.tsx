@@ -16,7 +16,7 @@ export const Editor = styled.div`
   position: relative;
 `;
 
-export const Bar = styled.div`
+export const Bar = styled.div.attrs({ className: "handle-bar" })`
   background: #313131;
   width: 20px;
   position: absolute;
