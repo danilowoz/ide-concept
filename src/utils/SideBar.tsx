@@ -12,7 +12,7 @@ export const Bar = styled.div`
   bottom: 0;
   border-radius: 50px;
 
-  opacity: 0.6;
+  opacity: 1;
   transition: all 0.2s ease;
 
   &:hover {
