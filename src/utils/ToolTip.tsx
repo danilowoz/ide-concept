@@ -77,7 +77,7 @@ const ToolTip: React.FC<{
   backgroundColor: string;
   items?: { title: string; documentation: string; template: string }[];
   onSelect: (template: string) => void;
-  triggerRef: any;
+  triggerRef?: any;
 }> = ({ trigger, triggerRef, backgroundColor, items = [], onSelect }) => {
   const Trigger = trigger;
   const localClick = useRef("main");

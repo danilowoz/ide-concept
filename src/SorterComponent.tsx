@@ -1,6 +1,6 @@
 import React, { Children, Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Bar } from "./utils/SideBar";
+
 import styled from "styled-components";
 
 const Item = styled.div`
@@ -16,10 +16,6 @@ const reorder = (list, startIndex, endIndex) => {
 
   return result;
 };
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-  ...draggableStyle
-});
 
 export class SorterComponent extends Component {
   constructor(props, context) {

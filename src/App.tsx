@@ -4,17 +4,7 @@ import { useNavRef } from "./utils/navRef";
 import * as actions from "./actions";
 import { GlobalStyle } from "./utils/globalStyle";
 import { SorterComponent } from "./SorterComponent";
-import { Render } from "./utils/Render";
-import styled from "styled-components";
-
-const SorterBar = styled(Bar)`
-  user-select: none;
-  background-color: #552525;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 0;
-`;
+import { Render, SorterBar } from "./Render";
 
 export default function App() {
   const { setRef, onJumpArea } = useNavRef();
@@ -71,14 +61,14 @@ export default function App() {
     <>`}
             />
             <SorterComponent>
-              <>
+              <div>
                 <CodeEditor type="render" data={`      <h1>Hello World</h1>`} />
                 <SorterBar />
-              </>
-              <>
+              </div>
+              <div>
                 <CodeEditor type="render" data={`      <p>Lorem ipsum</p>`} />
                 <SorterBar />
-              </>
+              </div>
             </SorterComponent>
 
             <CodeEditor type="render" barColor="#552525" data={`    </> `} />
