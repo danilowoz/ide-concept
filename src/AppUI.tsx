@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Body = styled.div`
-  padding: 10em 0;
+  margin: auto;
 `;
 
 export const Editor = styled.div`

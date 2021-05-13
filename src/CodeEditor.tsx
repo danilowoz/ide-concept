@@ -21,6 +21,7 @@ function CodeEditor({
   data: string;
   barColor?: string;
   onJumpArea: any;
+  onChangeCode: any;
   noTriggerOnSelect?: boolean;
   onSelectItem?: any;
   menuActions?: any[];

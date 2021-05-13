@@ -40,7 +40,10 @@ const CustomBar = styled(Bar)`
   }
 `;
 
-export const SorterBar: React.FC = (props) => {
+export const SorterBar: React.FC<{ onSelect: any }> = ({
+  onSelect,
+  ...props
+}) => {
   const [command, setCommand] = useState<"drag" | "edit">("drag");
 
   const timer = useRef<number | undefined>();
@@ -54,7 +57,7 @@ export const SorterBar: React.FC = (props) => {
 
       timer.current = setTimeout(() => {
         setCommand("drag");
-      }, 2000);
+      }, 3000);
     },
     [command]
   );
@@ -79,7 +82,7 @@ export const SorterBar: React.FC = (props) => {
     <ToolTip
       items={actions.renderItem}
       backgroundColor={"#552525"}
-      onSelect={console.log}
+      onSelect={onSelect}
       trigger={(props: any) => (
         <CustomBar style={{ cursor: "pointer" }} {...props}>
           <div>

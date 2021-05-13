@@ -14,6 +14,18 @@ export default function App() {
     `      <p>Lorem ipsum</p>`
   ]);
 
+  const handleTemplateRenderChange = (template: string, index: number) => {
+    setRenderCode((prev) =>
+      prev.map((code, prevIndex) => {
+        if (prevIndex === index) {
+          return `      ${template.replace("{{template}}", code.trim())}`;
+        }
+
+        return code;
+      })
+    );
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -40,7 +52,7 @@ export default function App() {
             onJumpArea={onJumpArea(1)}
             menuActions={actions.states}
             barColor="#2E5E51"
-            data={`  const [state, setState] = useState()
+            data={`  const [state, setState] = useState("Hello world")
 `}
           />
           <CodeEditor type="empty" data={""} />
@@ -51,8 +63,8 @@ export default function App() {
             menuActions={actions.effects}
             barColor="#254262"
             data={`  useEffect(() => {
-    // doSomething()
-  }, [])
+    document.title = state
+  }, [state])
   `}
           />
 
@@ -65,7 +77,11 @@ export default function App() {
               data={`  return (
     <>`}
             />
-            <SorterComponent onChange={setRenderCode} renderCode={renderCode} />
+            <SorterComponent
+              onSort={setRenderCode}
+              onChangeTemplate={handleTemplateRenderChange}
+              renderCode={renderCode}
+            />
 
             <CodeEditor
               onSelectItem={(template: any) =>
@@ -76,15 +92,11 @@ export default function App() {
               barColor="#552525"
               menuActions={actions.render}
               data={`    </> 
-            `}
+  )`}
             />
           </Render>
 
-          <CodeEditor
-            type="empty"
-            data={`
-}`}
-          />
+          <CodeEditor type="empty" data={`}`} />
         </Editor>
       </Body>
     </>

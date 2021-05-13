@@ -9,4 +9,10 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
   }
+
+  #root {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
 `;

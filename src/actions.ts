@@ -73,11 +73,17 @@ export const render = [
 
 export const renderItem = [
   {
-    title: "Wrap in a conditional",
+    title: "Add conditional",
     template: `{someBoolean && {{template}}}`
   },
   {
+    title: "Add ternary operator",
+    template: `{someBoolean ? {{template}} : null}`
+  },
+  {
     title: ".map it",
-    template: `{[].map(item => {{template}})}`
+    template: `{[].map(item => {{template}})}`,
+    documentation:
+      "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
   }
 ];

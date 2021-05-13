@@ -22,11 +22,11 @@ const reorder = (list, startIndex, endIndex) => {
 export class SorterComponent extends Component {
   constructor(props, context) {
     super(props, context);
-    // eslint-disable-next-line react/state-in-constructor
+
     this.state = {
       items: this.props.renderCode.map((item, index) => ({
         content: item,
-        id: `item ${index}`
+        id: `${item}-${index}`
       }))
     };
 
@@ -34,12 +34,11 @@ export class SorterComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.renderCode !== this.state.renderCode) {
-      console.log(this.props.renderCode);
+    if (prevProps.renderCode !== this.props.renderCode) {
       this.setState({
         items: this.props.renderCode.map((item, index) => ({
           content: item,
-          id: `item ${index}`
+          id: `${item}-${index}`
         }))
       });
     }
@@ -57,12 +56,14 @@ export class SorterComponent extends Component {
       result.destination.index
     );
 
+    console.log(this.state.items);
+
     this.setState(
       {
         items
       },
       () => {
-        this.props.onChange?.(this.state.items.map((e) => e.content));
+        this.props.onSort?.(this.state.items.map((e) => e.content));
       }
     );
   }
@@ -70,14 +71,15 @@ export class SorterComponent extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
+    console.log(this.state.items);
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable">
-          {(droppableProvided, droppableSnapshot) => (
+          {(droppableProvided) => (
             <div ref={droppableProvided.innerRef}>
               {this.state.items.map((item, index) => (
                 <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(draggableProvided, draggableSnapshot) => (
+                  {(draggableProvided) => (
                     <Item
                       ref={draggableProvided.innerRef}
                       {...draggableProvided.draggableProps}
@@ -85,7 +87,11 @@ export class SorterComponent extends Component {
                     >
                       <div>
                         <CodeEditor data={item.content} />
-                        <SorterBar />
+                        <SorterBar
+                          onSelect={(template) =>
+                            this.props.onChangeTemplate(template, index)
+                          }
+                        />
                       </div>
                     </Item>
                   )}
