@@ -35,6 +35,7 @@ const StyledItem = styled(DropdownMenu.Item)`
   font-size: 13px;
   transition: all 0.2s ease;
   display: flex;
+  white-space: nowrap;
 
   &:focus .box:first-child {
     color: rgba(255, 255, 255, 1);
@@ -56,7 +57,7 @@ const StyledItem = styled(DropdownMenu.Item)`
       background: rgba(0, 0, 0, 0.1);
     }
 
-    &:last-child {
+    &.doc {
       padding-left: 0;
       padding-right: 0;
       text-align: center;
@@ -120,7 +121,7 @@ const ToolTip: React.FC<{
                 <span
                   onMouseEnter={() => (localClick.current = "doc")}
                   onMouseLeave={() => (localClick.current = "main")}
-                  className="box"
+                  className="box doc"
                 >
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
                     <path

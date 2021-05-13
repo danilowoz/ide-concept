@@ -13,12 +13,16 @@ function CodeEditor({
   barColor,
   onJumpArea,
   menuActions,
+  onSelectItem,
+  noTriggerOnSelect = false,
   type
 }: {
   innerRef: any;
   data: string;
   barColor?: string;
   onJumpArea: any;
+  noTriggerOnSelect?: boolean;
+  onSelectItem?: any;
   menuActions?: any[];
   type: "empty" | "state" | "effect" | "render";
 }) {
@@ -84,20 +88,24 @@ function CodeEditor({
   };
 
   const onSelect = (template: string) => {
-    setContent((prev) => {
-      const removeLastEmptyRow = prev
-        .split(/\n/)
-        .filter(
-          (e, index, array) => index + 1 !== array.length && e.trim() !== ""
-        )
-        .join("\n");
+    onSelectItem?.(template);
 
-      return `${type === "state" ? removeLastEmptyRow : prev}
+    if (!noTriggerOnSelect) {
+      setContent((prev) => {
+        const removeLastEmptyRow = prev
+          .split(/\n/)
+          .filter(
+            (e, index, array) => index + 1 !== array.length && e.trim() !== ""
+          )
+          .join("\n");
+
+        return `${type === "state" ? removeLastEmptyRow : prev}
   ${template}
 `;
-    });
+      });
 
-    combinedRef.current?.focus();
+      combinedRef.current?.focus();
+    }
   };
 
   useEffect(() => {
@@ -136,6 +144,8 @@ export default forwardRef<
     data: string;
     barColor?: string;
     onJumpArea?: any;
+    onSelectItem?: any;
+    noTriggerOnSelect?: boolean;
     menuActions?: any[];
     type: "empty" | "state" | "effect" | "render";
   }

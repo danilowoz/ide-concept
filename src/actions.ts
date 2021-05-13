@@ -59,3 +59,25 @@ export const effects = [
   }, [])`
   }
 ];
+
+export const render = [
+  {
+    title: `<Header /> - "./Header"`,
+    template: `      <Header />`
+  },
+  {
+    title: `<Box /> - "./Box"`,
+    template: `      <Box />`
+  }
+];
+
+export const renderItem = [
+  {
+    title: "Wrap in a conditional",
+    template: `{someBoolean && {{template}}}`
+  },
+  {
+    title: ".map it",
+    template: `{[].map(item => {{template}})}`
+  }
+];

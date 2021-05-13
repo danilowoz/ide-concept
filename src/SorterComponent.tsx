@@ -1,7 +1,9 @@
-import React, { Children, Component } from "react";
+import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import styled from "styled-components";
+import CodeEditor from "./CodeEditor";
+import { SorterBar } from "./Render";
 
 const Item = styled.div`
   position: relative;
@@ -22,12 +24,25 @@ export class SorterComponent extends Component {
     super(props, context);
     // eslint-disable-next-line react/state-in-constructor
     this.state = {
-      items: Children.map(this.props.children, (item, index) => ({
+      items: this.props.renderCode.map((item, index) => ({
         content: item,
         id: `item ${index}`
       }))
     };
+
     this.onDragEnd = this.onDragEnd.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.renderCode !== this.state.renderCode) {
+      console.log(this.props.renderCode);
+      this.setState({
+        items: this.props.renderCode.map((item, index) => ({
+          content: item,
+          id: `item ${index}`
+        }))
+      });
+    }
   }
 
   onDragEnd(result) {
@@ -42,9 +57,14 @@ export class SorterComponent extends Component {
       result.destination.index
     );
 
-    this.setState({
-      items
-    });
+    this.setState(
+      {
+        items
+      },
+      () => {
+        this.props.onChange?.(this.state.items.map((e) => e.content));
+      }
+    );
   }
 
   // Normally you would want to split things out into separate components.
@@ -63,7 +83,10 @@ export class SorterComponent extends Component {
                       {...draggableProvided.draggableProps}
                       {...draggableProvided.dragHandleProps}
                     >
-                      {item.content}
+                      <div>
+                        <CodeEditor data={item.content} />
+                        <SorterBar />
+                      </div>
                     </Item>
                   )}
                 </Draggable>

@@ -4,10 +4,15 @@ import { useNavRef } from "./utils/navRef";
 import * as actions from "./actions";
 import { GlobalStyle } from "./utils/globalStyle";
 import { SorterComponent } from "./SorterComponent";
-import { Render, SorterBar } from "./Render";
+import { Render } from "./Render";
+import { useState } from "react";
 
 export default function App() {
   const { setRef, onJumpArea } = useNavRef();
+  const [renderCode, setRenderCode] = useState([
+    `      <h1>Hello World</h1>`,
+    `      <p>Lorem ipsum</p>`
+  ]);
 
   return (
     <>
@@ -60,18 +65,19 @@ export default function App() {
               data={`  return (
     <>`}
             />
-            <SorterComponent>
-              <div>
-                <CodeEditor type="render" data={`      <h1>Hello World</h1>`} />
-                <SorterBar />
-              </div>
-              <div>
-                <CodeEditor type="render" data={`      <p>Lorem ipsum</p>`} />
-                <SorterBar />
-              </div>
-            </SorterComponent>
+            <SorterComponent onChange={setRenderCode} renderCode={renderCode} />
 
-            <CodeEditor type="render" barColor="#552525" data={`    </> `} />
+            <CodeEditor
+              onSelectItem={(template: any) =>
+                setRenderCode((prev) => [...prev, template])
+              }
+              type="render"
+              noTriggerOnSelect
+              barColor="#552525"
+              menuActions={actions.render}
+              data={`    </> 
+            `}
+            />
           </Render>
 
           <CodeEditor

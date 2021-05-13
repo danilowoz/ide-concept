@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useHotkeys, useIsHotkeyPressed } from "react-hotkeys-hook";
+import React, { useRef, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import styled from "styled-components";
 import { Bar } from "./AppUI";
 import ToolTip from "./utils/ToolTip";
+import * as actions from "./actions";
 
 const CustomBar = styled(Bar)`
   user-select: none;
@@ -41,11 +42,9 @@ const CustomBar = styled(Bar)`
 
 export const SorterBar: React.FC = (props) => {
   const [command, setCommand] = useState<"drag" | "edit">("drag");
-  const isPressed = useIsHotkeyPressed();
 
   const timer = useRef<number | undefined>();
 
-  // useHotkeys("⌘+*", () => setCommand("edit"), { keydown: true });
   useHotkeys(
     "⌘+*",
     () => {
@@ -62,30 +61,23 @@ export const SorterBar: React.FC = (props) => {
 
   if (command === "drag") {
     return (
-      <ToolTip
-        items={[]}
-        backgroundColor={"#552525"}
-        onSelect={console.log}
-        trigger={(props: any) => (
-          <CustomBar style={{ cursor: "move" }} {...props}>
-            <div>
-              <svg height="15" width="15" version="1.1" viewBox="0 0 512 512">
-                <g fill="currentColor">
-                  <path d="M432 354H80V370H432V354Z" fill="white" />
-                  <path d="M432 248H80V264H432V248Z" fill="white" />
-                  <path d="M432 142H80V158H432V142Z" fill="white" />
-                </g>
-              </svg>
-            </div>
-          </CustomBar>
-        )}
-      />
+      <CustomBar style={{ cursor: "move" }} {...props}>
+        <div>
+          <svg height="15" width="15" version="1.1" viewBox="0 0 512 512">
+            <g fill="currentColor">
+              <path d="M432 354H80V370H432V354Z" fill="white" />
+              <path d="M432 248H80V264H432V248Z" fill="white" />
+              <path d="M432 142H80V158H432V142Z" fill="white" />
+            </g>
+          </svg>
+        </div>
+      </CustomBar>
     );
   }
 
   return (
     <ToolTip
-      items={[]}
+      items={actions.renderItem}
       backgroundColor={"#552525"}
       onSelect={console.log}
       trigger={(props: any) => (
