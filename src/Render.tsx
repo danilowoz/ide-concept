@@ -102,6 +102,7 @@ export const SorterBar: React.FC<{ onSelect: any }> = ({
 };
 
 export const Render = styled.div`
+  position: relative;
   &:hover {
     .handle-bar {
       opacity: 1;

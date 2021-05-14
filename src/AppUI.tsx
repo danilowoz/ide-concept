@@ -10,7 +10,7 @@ export const Editor = styled.div`
   padding: 20px 0;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(0, 0, 0, 0.3),
     0px 0px 1px rgba(0, 0, 0, 0.7);
-  min-width: 600px;
+  min-width: 700px;
   width: max-content;
   margin: auto;
   position: relative;

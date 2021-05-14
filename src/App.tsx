@@ -10,8 +10,9 @@ import { useState } from "react";
 export default function App() {
   const { setRef, onJumpArea } = useNavRef();
   const [renderCode, setRenderCode] = useState([
-    `      <h1>Hello World</h1>`,
-    `      <p>Lorem ipsum</p>`
+    `      <h1>{state}</h1>`,
+    `      <p>Lorem ipsum</p>`,
+    `      <input onChange={({target}) => setState(target.value)} />`
   ]);
 
   const handleTemplateRenderChange = (template: string, index: number) => {
