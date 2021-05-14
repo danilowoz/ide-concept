@@ -1,5 +1,5 @@
 import CodeEditor from "./CodeEditor";
-import { Editor, Bar, LineCounter, Body, Filename } from "./AppUI";
+import { Editor, Bar, LineCounter, Body, Filename, KeyBindings } from "./AppUI";
 import { useNavRef } from "./utils/navRef";
 import * as actions from "./actions";
 import { GlobalStyle } from "./utils/globalStyle";
@@ -99,6 +99,22 @@ export default function App() {
 
           <CodeEditor type="empty" data={`}`} />
         </Editor>
+
+        <p>Key bindings:</p>
+        <KeyBindings>
+          <li>
+            <span>ctrl + s</span>: for states area
+          </li>
+          <li>
+            <span>ctrl + e</span>: for effects area
+          </li>
+          <li>
+            <span>ctrl + r</span>: for render area
+          </li>
+          <li>
+            <span>command + mouseover</span>: to see the options in a component
+          </li>
+        </KeyBindings>
       </Body>
     </>
   );

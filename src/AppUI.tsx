@@ -53,3 +53,12 @@ export const Filename = styled.div`
   font-size: 8px;
   letter-spacing: 0.2px;
 `;
+
+export const KeyBindings = styled.ul`
+  color: rgba(0, 0, 0, 0.6);
+
+  span {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+  }
+`;
